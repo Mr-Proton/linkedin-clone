@@ -20,8 +20,9 @@ $linkedinBlue2: #004f79;
 }
 
 .login-wrapper-inner{
-    margin-left: 180px;
-    width: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .auth-inputs{
@@ -102,9 +103,10 @@ $linkedinBlue2: #004f79;
   }
 
 .google-btn-container{
-    margin-left: 180px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     text-align: center;
-    width: 300px;
 }
 
 .google-btn{
