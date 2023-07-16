@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./index.scss";
 import LinkedinLogo from "../../../assets/logo.png";
 import { BiSolidHome } from "react-icons/bi";
@@ -8,12 +8,14 @@ import { IoNotifications } from "react-icons/io5";
 import { BsFillBriefcaseFill, BsSearch } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
 import User from "../../../assets/user.png";
+import LogoutModal from "../Modal/profileModal";
 
 function Topbar() {
   let navigate = useNavigate();
   const goToRoute = (route) => {
     navigate(route);
   };
+  const [modalOpen, setModalOpen] = useState(false);
   return (
     <div className="topbar-main">
       <img src={LinkedinLogo} alt="" className="linkedin-logo" />
@@ -33,7 +35,13 @@ function Topbar() {
         <AiFillMessage size={30} className="react-icon" />
         <IoNotifications size={30} className="react-icon" />
       </div>
-      <img src={User} alt="" className="user-logo" />
+      <img
+        src={User}
+        alt=""
+        className="user-logo"
+        onClick={() => setModalOpen(true)}
+      />
+      <LogoutModal setModalOpen={setModalOpen} modalOpen={modalOpen}/>
     </div>
   );
 }

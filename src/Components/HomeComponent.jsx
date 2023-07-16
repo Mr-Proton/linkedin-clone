@@ -1,10 +1,10 @@
-import React from 'react'
+import React, {useState} from 'react'
 import '../Sass/HomeComponent.scss'
 import PostStatus from './common/Postupdate'
 
-function HomeComponent() {
+function HomeComponent({currentUser}) {
   return (
-    <div className='home-component'><PostStatus /></div>
+    <div className='home-component'><PostStatus currentUser={currentUser}/></div>
   )
 }
 

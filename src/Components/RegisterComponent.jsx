@@ -5,14 +5,16 @@ import linkedinLogo from "../assets/logo.png";
 import GoogleButton from "react-google-button";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { postUserData } from "../api/FirestoreAPI";
 
 export default function RegisterComponent() {
   let navigate = useNavigate()
   const [credentials, setCredentials] = useState({})
-  const login = async() => {
+  const register = async() => {
     try{
       let res = await RegisterAPI(credentials.email, credentials.password)
       toast.success("Account created")
+      postUserData({name: credentials.name, email: credentials.email})
       localStorage.setItem("userEmail", res.user.email)
       navigate("/home")
     }catch(err){
@@ -33,6 +35,14 @@ export default function RegisterComponent() {
         <h1 className="heading">Make most of your professional life</h1>
 
         <div className="auth-inputs">
+        <input
+            onChange={(event) =>
+              setCredentials({ ...credentials, name: event.target.value })
+            }
+            type="email"
+            className="common-input"
+            placeholder="Full Name"
+          />
           <input
             onChange={(event) =>
               setCredentials({ ...credentials, email: event.target.value })
@@ -50,7 +60,7 @@ export default function RegisterComponent() {
             placeholder="Password"
           />
         </div>
-        <button onClick={login} className="login-btn">
+        <button onClick={register} className="login-btn">
           Agree and Join
         </button>
       </div>
