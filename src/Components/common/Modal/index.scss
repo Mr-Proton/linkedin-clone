@@ -47,7 +47,22 @@ $linkedinBlue2: #004f79;
     transition: 0.3s;
 }
 
-.profile-name:hover{
+.profile-view:hover{
     color: $linkedinBlue2;
     background-color: #bbd1dd;
+}
+
+.logout-btn{
+    width: 100%;
+    background-color: white ;
+    box-shadow: none;
+    color: rgba(0,0,0,0.9);
+    font-family: system-ui;
+    font-weight: 400;
+    font-size: 13px;
+    border: none;
+}
+
+.logout-btn:hover{
+    background-color: white;
 }

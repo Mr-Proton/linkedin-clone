@@ -21,9 +21,6 @@ const LogoutModal = ({ modalOpen, setModalOpen, currentUser }) => {
         onOk={() => setModalOpen(false)}
         onCancel={() => setModalOpen(false)}
         footer={[
-          <Button key="submit" type="primary" onClick={onLogout}>
-            Logout
-          </Button>,
         ]}
       >
         <div className="modal-div">
@@ -39,6 +36,9 @@ const LogoutModal = ({ modalOpen, setModalOpen, currentUser }) => {
           >
             View Profile
           </h2>
+          <button className="logout-btn" key="submit" type="primary" onClick={onLogout}>
+            Logout
+          </button>
         </div>
       </Modal>
     </>
