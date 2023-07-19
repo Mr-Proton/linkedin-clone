@@ -11,7 +11,7 @@ function ProfileLayout() {
       }, [])
   return (
     <>
-        <Topbar />
+        <Topbar currentUser={currentUser}/>
         <Profile currentUser={currentUser}/>
     </>
   )

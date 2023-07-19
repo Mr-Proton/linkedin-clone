@@ -45,6 +45,19 @@ export const getCurrentUser = (setCurrentUser) =>{
     })
 }
 
+export const getPostUser = (setPostUser,postEmail) =>{
+    let currEmail = localStorage.getItem("userEmail")
+    onSnapshot(userRef, (response) =>{
+        setPostUser(
+            response.docs.map((docs) => {
+                return {...docs.data(), userID:docs.id}
+            }).filter((item) => {
+                return item.email === postEmail
+            })[0]
+        )
+    })
+}
+
 export const editProfile = (userID, payload) =>{
     let userToEdit = doc(userRef, userID)
 

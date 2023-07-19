@@ -10,7 +10,7 @@ import { useNavigate } from "react-router-dom";
 import User from "../../../assets/user.png";
 import LogoutModal from "../Modal/profileModal";
 
-function Topbar() {
+function Topbar({currentUser}) {
   let navigate = useNavigate();
   const goToRoute = (route) => {
     navigate(route);
@@ -41,7 +41,7 @@ function Topbar() {
         className="user-logo"
         onClick={() => setModalOpen(true)}
       />
-      <LogoutModal setModalOpen={setModalOpen} modalOpen={modalOpen}/>
+      <LogoutModal setModalOpen={setModalOpen} modalOpen={modalOpen} currentUser={currentUser}/>
     </div>
   );
 }
