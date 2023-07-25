@@ -2,7 +2,7 @@ $linkedinBlue: #0072b1;
 $linkedinBlue2: #004f79;
 
 .profile-edit{
-    padding-top: 10px;
+    padding-top: 30px;
     margin-left: 10%;
     margin-right: 10%;
     margin-top: 60px;
@@ -15,10 +15,25 @@ $linkedinBlue2: #004f79;
 }
 
 .edit-profile{
+    width: 100px;
+    height: 30px;
     right: 20px;
     position: absolute;
     top: 10px;
     cursor: pointer;
+    background-color: $linkedinBlue;
+    margin-top: 15px;
+    border-radius: 25px;
+    outline: none;
+    border: none;
+    font-family: system-ui;
+    font-weight: 600;
+    color: #fff;
+    font-size: 15px;
+}
+
+.edit-profile:hover{
+    background-color: $linkedinBlue2;
 }
 
 .edit-data{

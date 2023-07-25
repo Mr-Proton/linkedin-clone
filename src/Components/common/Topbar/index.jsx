@@ -18,7 +18,7 @@ function Topbar({currentUser}) {
   const [modalOpen, setModalOpen] = useState(false);
   return (
     <div className="topbar-main">
-      <img src={LinkedinLogo} alt="" className="linkedin-logo" />
+      <img src={LinkedinLogo} alt="" onClick={() => goToRoute("/home")} className="linkedin-logo" />
       <div className="react-icons">
         <BsSearch size={25} className="react-icon" />
         <BiSolidHome
