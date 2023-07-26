@@ -1,5 +1,7 @@
 import React, { useState, useMemo, useId } from "react";
 import "./index.scss";
+import uniqueID from "../../../helpers/uniqueID";
+import { uid } from "react-uid";
 import { postStatus, getStatus } from "../../../api/FirestoreAPI";
 import PostsCard from "../PostsCard/index";
 import { getCurrentTimeStamp } from "../../../helpers/useMoment";
@@ -12,12 +14,13 @@ function PostStatus({currentUser}) {
   const [id, setId] = useState(useId())
   const [allStatuses, setAllStatuses] = useState([])
   const sendStatus = async () => {
+    const postID = uniqueID()
     let object = {
       status: status,
       timeStamp: getCurrentTimeStamp("LLL"),
       userEmail: currentUser.email,
       userName: currentUser.name,
-      postID: id
+      postID: postID
     }
     await postStatus(object) 
     await setModalOpen(false)

@@ -1,9 +1,10 @@
 import { firestore } from "../firebaseConfig"
-import { addDoc, collection, onSnapshot, doc, updateDoc } from "firebase/firestore"
+import { addDoc, collection, onSnapshot, doc, updateDoc, setDoc, query, where, deleteDoc } from "firebase/firestore"
 import { toast } from "react-toastify"
 
 let postsRef = collection(firestore, "posts")
 let userRef = collection(firestore, "users")
+let likeRef = collection(firestore, "likes")
 
 export const postStatus = (object) =>{
     addDoc(postsRef, object)
@@ -68,4 +69,34 @@ export const editProfile = (userID, payload) =>{
     .catch((err) =>{
         console.log(err)
     })
+}
+
+export const likePost = (userID, postID, liked) => {
+    try{
+        let docToLike = doc(likeRef, `${userID}_${postID}`)
+        if(liked){
+            deleteDoc(docToLike)
+        }
+        else{
+            setDoc(docToLike, {userID, postID})
+        }
+    }
+    catch(err){
+        console.log(err)
+    }
+}
+
+export const getLikesByUser = (userID, postID, setLikesCount, setLiked) => {
+    try{
+        let likeQuery = query(likeRef, where("postID", "==", postID ))
+        onSnapshot(likeQuery, (response) => {
+            let likes = response.docs.map((doc) => doc.data())
+            let likesCount = likes.length
+            const isLiked = likes.some((like) => like.userID === userID)
+            setLikesCount(likesCount)
+            setLiked(isLiked)
+        })
+    }catch(err){
+        console.log(err)
+    }
 }

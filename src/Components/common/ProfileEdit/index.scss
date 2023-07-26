@@ -12,6 +12,11 @@ $linkedinBlue2: #004f79;
     flex-direction: column;
     padding-left: 30px;
     padding-right: 30px;
+    border-radius: 5px;
+}
+
+label{
+    font-family: system-ui;
 }
 
 .edit-profile{
@@ -37,9 +42,10 @@ $linkedinBlue2: #004f79;
 }
 
 .edit-data{
-    height: 30px;
+    height: 20px;
     padding: 10px;
-    margin-top: 35px;
+    margin-top: 15px;
+    margin-bottom: 15px;
     background-color: white;
     outline: none;
     border: 1px solid #212121;
@@ -48,6 +54,25 @@ $linkedinBlue2: #004f79;
     font-family: system-ui;
 }
 .edit-data:focus{
+    outline: 1px solid $linkedinBlue;
+}
+::placeholder{
+    font-family: system-ui;
+    font-size: 16px;
+}
+
+.edit-about{
+    padding: 10px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    background-color: white;
+    outline: none;
+    border: 1px solid #212121;
+    border-radius: 3px;
+    color: #212121;
+    font-family: system-ui;
+}
+.edit-about:focus{
     outline: 1px solid $linkedinBlue;
 }
 ::placeholder{
