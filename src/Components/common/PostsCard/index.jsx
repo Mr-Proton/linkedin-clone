@@ -21,7 +21,7 @@ function PostsCard({posts}) {
         }}>{postUser.name}</p>
         <p className='timestamp'>{posts.timeStamp}</p>
         <p className='status'>{posts.status}</p>
-        <LikeButton userID={currentUser.userID} postID={posts.postID}/>
+        <LikeButton userID={currentUser.userID} postID={posts.postID} currentUser={currentUser}/>
     </div>
   )
 }

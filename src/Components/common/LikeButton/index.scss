@@ -1,5 +1,6 @@
 $linkedinBlue: #0072b1;
 
+
 .like{
     display: flex;
     flex-direction: column;
@@ -15,7 +16,12 @@ $linkedinBlue: #0072b1;
     gap: 4px;
 }
 
-.likes{
+.extras{
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+}
+
+.likes-comments{
     margin-top: 20px;
     display: flex;
     align-items: center;
@@ -48,4 +54,70 @@ hr{
     position: absolute;
     left: 0;
     border-top: 1px solid #cbcaca;
+}
+
+.comment-input{
+    height: 25px;
+    color: black;
+    margin-right: 3%;
+    background-color: #FFFEFE;
+    border: 1px solid #6c6c6c;
+    border-radius: 25px;
+    padding: 5px 10px;
+    font-family: system-ui;
+    font-size: 14px;
+}
+
+.comment-input:focus{
+    outline: 1px solid #6c6c6c;
+}
+
+.post{
+    background-color: $linkedinBlue;
+    outline: none;
+    border: none;
+    height: 30px;
+    border-radius: 15px;
+    width: 80px;
+    font-family: system-ui;
+    font-weight: 400;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.comment-box{
+    background-color: #eeecec;
+    margin-right: 3%;
+    padding: 5px 10px;
+    border-radius: 8px;
+    .timestamp{
+        margin-top: 0px;
+    }
+}
+
+.comment-flex{
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+}
+
+.comment-user-name{
+    margin-bottom: -8px;
+    font-family: system-ui;
+    font-size: 16px;
+    font-weight: 600;
+}
+.comment-text{
+    font-family: system-ui;
+    font-size: 17px;
+    font-weight: 400;
+    margin-top: 15px;
+}
+
+.comment-user-headline{
+    font-family: system-ui;
+    margin-bottom: -10px;
+    font-size: 14px;
+    color: #6c6c6c;
+    margin-top: 5px;
 }
