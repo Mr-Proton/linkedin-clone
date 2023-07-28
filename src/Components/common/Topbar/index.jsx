@@ -8,6 +8,7 @@ import { IoNotifications } from "react-icons/io5";
 import { BsFillBriefcaseFill, BsSearch } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
 import User from "../../../assets/user.png";
+import blank_profile from "../../Images/blank_profile.jpg";
 import LogoutModal from "../Modal/profileModal";
 
 function Topbar({currentUser}) {
@@ -15,6 +16,7 @@ function Topbar({currentUser}) {
   const goToRoute = (route) => {
     navigate(route);
   };
+
   const [modalOpen, setModalOpen] = useState(false);
   return (
     <div className="topbar-main">
@@ -36,7 +38,7 @@ function Topbar({currentUser}) {
         <IoNotifications size={30} className="react-icon" />
       </div>
       <img
-        src={User}
+        src={currentUser.imageLink ? currentUser.imageLink : blank_profile}
         alt=""
         className="user-logo"
         onClick={() => setModalOpen(true)}

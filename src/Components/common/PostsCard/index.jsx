@@ -1,5 +1,6 @@
 import './index.scss'
 import LikeButton from '../LikeButton'
+import blank_profile from "../../Images/blank_profile.jpg";
 import { getPostUser,getCurrentUser } from '../../../api/FirestoreAPI'
 import React, { useState, useMemo } from 'react'
 import { useNavigate } from 'react-router-dom'
@@ -16,9 +17,12 @@ function PostsCard({posts}) {
   }, [])  
   return (
     <div className='posts-card'>
-        <p className="name" onClick={() => {
-          navigate("/profile", {state :{email : posts.userEmail}})
-        }}>{postUser.name}</p>
+        <div className="profile-head-info" onClick={() => {
+            navigate("/profile", {state :{email : posts.userEmail}})
+          }}>
+          <img src={postUser.imageLink ? postUser.imageLink : blank_profile} className='mini-profile' alt="" />
+          <p className="name" >{postUser.name}</p>
+        </div>
         <p className='timestamp'>{posts.timeStamp}</p>
         <p className='status'>{posts.status}</p>
         <LikeButton userID={currentUser.userID} postID={posts.postID} currentUser={currentUser}/>

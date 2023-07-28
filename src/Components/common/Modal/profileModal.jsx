@@ -1,6 +1,7 @@
 import React from "react";
 import { Modal, Button } from "antd";
 import "./index.scss";
+import blank_profile from "../../Images/blank_profile.jpg"
 import { onLogout } from "../../../api/AuthAPI";
 import { useNavigate } from "react-router-dom";
 
@@ -24,9 +25,12 @@ const LogoutModal = ({ modalOpen, setModalOpen, currentUser }) => {
         ]}
       >
         <div className="modal-div">
-          <div className="profile-info">
-            <h1 className="profile-name">{currentUser.name}</h1>
-            <p className="head-line">{currentUser.headline}</p>
+          <div className="modal-profile-head">
+            <img className="modal-profile-image" src={currentUser.imageLink ? currentUser.imageLink : blank_profile} alt="" />
+            <div className="profile-info">
+              <h1 className="profile-name">{currentUser.name}</h1>
+              <p className="head-line">{currentUser.headline}</p>
+            </div>
           </div>
           <h2
             className="profile-view"

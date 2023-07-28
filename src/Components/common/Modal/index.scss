@@ -19,6 +19,19 @@ $linkedinBlue2: #004f79;
     align-items: center;
 }
 
+.modal-profile-head{
+    display: flex;
+    align-items: center;
+}
+
+.modal-profile-image{
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    padding: 2px;
+    border: 1px solid #767676;
+}
+
 .profile-info{
     width: 80%;
     margin-left: 20px;
