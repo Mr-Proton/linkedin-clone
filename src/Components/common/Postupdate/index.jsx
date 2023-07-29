@@ -1,8 +1,9 @@
 import React, { useState, useMemo, useId } from "react";
 import "./index.scss";
+import blank_profile from "../../Images/blank_profile.jpg";
 import uniqueID from "../../../helpers/uniqueID";
 import { uid } from "react-uid";
-import { postStatus, getStatus } from "../../../api/FirestoreAPI";
+import { postStatus, getStatus, updatePost } from "../../../api/FirestoreAPI";
 import PostsCard from "../PostsCard/index";
 import { getCurrentTimeStamp } from "../../../helpers/useMoment";
 import ModalComponent from "../Modal/index";
@@ -12,6 +13,8 @@ function PostStatus({currentUser}) {
   const [modalOpen, setModalOpen] = useState(false);
   const [status, setStatus] = useState("");
   const [id, setId] = useState(useId())
+  const [currentPost,setCurrentPost] = useState({})
+  const [isEdit, setIsEdit] = useState(false)
   const [allStatuses, setAllStatuses] = useState([])
   const sendStatus = async () => {
     const postID = uniqueID()
@@ -24,7 +27,21 @@ function PostStatus({currentUser}) {
     }
     await postStatus(object) 
     await setModalOpen(false)
+    setIsEdit(false)
     await setStatus("")
+  }
+  
+  const getEditData = (posts) => {
+    setStatus(posts?.status)
+    setModalOpen(true)
+    setCurrentPost(posts)
+    setIsEdit(true)
+  }
+  const updateStatus = () => {
+    updatePost(currentPost.id, status)
+    setStatus("")
+    setIsEdit(false)
+    setModalOpen(false)
   }
   useMemo(() =>{
     getStatus(setAllStatuses)
@@ -32,7 +49,13 @@ function PostStatus({currentUser}) {
 
   return (
     <div className="post-status-main">
+      <div className="user-details">
+        <img src={currentUser.imageLink? currentUser.imageLink : blank_profile} alt="" />
+        <h1>{currentUser.name}</h1>
+        <p>{currentUser.headline}</p>
+      </div>
       <div className="post-status">
+        <img src={currentUser.imageLink? currentUser.imageLink : blank_profile} alt="" className="post-profile-photo"/>
         <button className="create-post" onClick={() => setModalOpen(true)}>
           Start a post
         </button>
@@ -44,9 +67,12 @@ function PostStatus({currentUser}) {
         status={status}
         sendStatus={sendStatus}
         setId={setId}
+        setIsEdit={setIsEdit}
+        isEdit={isEdit}
+        updateStatus={updateStatus}
       />
         {allStatuses.map((posts) =>{
-          return <PostsCard posts={posts}/>
+          return <PostsCard posts={posts} getEditData={getEditData}/>
         })}
     </div>
   );

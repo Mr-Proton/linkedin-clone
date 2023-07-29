@@ -31,7 +31,7 @@ function Topbar({currentUser}) {
         <HiUsers
           size={30}
           className="react-icon"
-          onClick={() => goToRoute("/profile")}
+          onClick={() => goToRoute("/connections")}
         />
         <BsFillBriefcaseFill size={30} className="react-icon" />
         <AiFillMessage size={30} className="react-icon" />

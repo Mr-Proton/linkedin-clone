@@ -144,3 +144,25 @@ export const getComments = (postID, setComments) => {
         console.log(err)
     }
 }
+
+export const updatePost = (postID, status) => {
+  let docToUpdate = doc(postsRef, postID)
+
+  try{
+    updateDoc(docToUpdate,  {status} )
+    toast.success("Post has been updated")
+  }
+  catch(err){
+    console.log(err)
+  }
+} 
+
+export const deletePost = (id) => {
+  let docToDelete = doc(postsRef, id)
+  try{
+    deleteDoc(docToDelete)
+    toast.success("Post has been deleted")
+  }catch(err){
+    console.log(err)
+  }
+}
