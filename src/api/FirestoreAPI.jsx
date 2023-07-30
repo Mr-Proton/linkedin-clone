@@ -16,6 +16,7 @@ let postsRef = collection(firestore, "posts");
 let userRef = collection(firestore, "users");
 let likeRef = collection(firestore, "likes");
 let commentsRef = collection(firestore, "comments");
+let connectionRef = collection(firestore, 'connections')
 
 export const postStatus = (object) => {
   addDoc(postsRef, object)
@@ -100,6 +101,16 @@ export const likePost = (userID, postID, liked) => {
   }
 };
 
+export const getAllUsers = (setAllUsers) => {
+  onSnapshot(userRef, (response) => {
+    setAllUsers(
+      response.docs.map((docs) =>{
+        return {...docs.data(), id:docs.id}
+      })
+    )
+  })
+}
+
 export const getLikesByUser = (userID, postID, setLikesCount, setLiked) => {
   try {
     let likeQuery = query(likeRef, where("postID", "==", postID));
@@ -166,3 +177,26 @@ export const deletePost = (id) => {
     console.log(err)
   }
 }
+
+export const addConnection = (userID, targetID) => {
+  try {
+    let connectionToAdd = doc(connectionRef, `${userID}_${targetID}`);
+      setDoc(connectionToAdd, { userID, targetID });
+      toast.success("Connection Added")
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export const getConnections = (userID, targetID, setIsConnected) => {
+  try {
+    let connectionsQuery = query(connectionRef, where("targetID", "==", targetID));
+    onSnapshot(connectionsQuery, (response) => {
+      let connections = response.docs.map((doc) => doc.data());
+      const isConnected = connections.some((connection) => (connection.userID === userID));
+      setIsConnected(isConnected)
+    });
+  } catch (err) {
+    console.log(err);
+  }
+};

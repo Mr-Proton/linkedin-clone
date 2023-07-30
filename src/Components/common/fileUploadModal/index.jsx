@@ -27,7 +27,6 @@ function FileUploadModal({
   };
   const getImage = (event) => {
     setCurrentImage(event.target.files[0]);
-    console.log(newImage);
     setNewImage(URL.createObjectURL(event.target.files[0]));
     setNewImagePresent(true);
   };

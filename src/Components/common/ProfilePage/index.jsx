@@ -2,8 +2,9 @@ import React, { useEffect, useMemo, useState } from "react";
 import "./index.scss";
 import blank_profile from "../../Images/blank_profile.jpg";
 import { BiPencil } from "react-icons/bi";
-import { getStatus } from "../../../api/FirestoreAPI";
+import { addConnection, getConnections, getStatus } from "../../../api/FirestoreAPI";
 import PostsCard from "../PostsCard";
+import { HiUsers } from "react-icons/hi";
 import { useLocation } from "react-router-dom";
 import { getPostUser } from "../../../api/FirestoreAPI";
 import FileUploadModal from "../fileUploadModal";
@@ -12,12 +13,20 @@ function ProfileCard({ currentUser, onEdit }) {
   const location = useLocation();
   const [presentUser, setPresentUser] = useState({});
   const [progress, setProgress] = useState(0)
+  const [isConnected, setIsConnected] = useState(false)
   const [modalOpen, setModalOpen] = useState(false);
+  const [allStatuses, setAllStatuses] = useState([]);
   useMemo(() => {
     getPostUser(setPresentUser, location.state.email);
-  }, []);
+  }, [location.state.email]);
+  
+  const makeConnection = (id) => {
+    addConnection(currentUser.userID, id)
+  };
+  useEffect(() => {
+    getConnections(currentUser.userID, presentUser.userID, setIsConnected)
+  }, [presentUser])
 
-  const [allStatuses, setAllStatuses] = useState([]);
   useMemo(() => {
     getStatus(setAllStatuses);
   }, []);
@@ -57,8 +66,11 @@ function ProfileCard({ currentUser, onEdit }) {
             </a>
           </div>
           <div className="info-right">
-            <p className="company">{presentUser.company}</p>
-            <p className="college">{presentUser.college}</p>
+            <div>
+              <p className="company">{presentUser.company}</p>
+              <p className="college">{presentUser.college}</p>
+            </div>
+            {isConnected ? <></> : <button onClick={() => makeConnection(presentUser.userID)}> <HiUsers></HiUsers> Connect</button>}
           </div>
         </div>
       </div>

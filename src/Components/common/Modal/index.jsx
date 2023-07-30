@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import { Modal, Button } from "antd";
 import "./index.scss";
+import { AiOutlinePicture } from 'react-icons/ai'
 
 const ModalComponent = ({
   modalOpen,
@@ -10,8 +11,11 @@ const ModalComponent = ({
   sendStatus,
   setIsEdit,
   isEdit,
-  updateStatus
+  updateStatus,
+  currentImage,
+  setCurrentImage
 }) => {
+  const [newImage, setNewImage] = useState();
   return (
     <>
       <Modal
@@ -22,11 +26,13 @@ const ModalComponent = ({
           setModalOpen(false);
           setStatus("");
           setIsEdit(false);
+          setNewImage()
         }}
         onCancel={() => {
           setModalOpen(false);
           setStatus("");
           setIsEdit(false);
+          setNewImage()
         }}
         footer={[
           <Button
@@ -39,13 +45,22 @@ const ModalComponent = ({
           </Button>,
         ]}
       >
-        <input
+        <textarea
           type="text"
+          rows={3}
+          cols={3}
           className="text"
           placeholder="What do you want to talk about?"
           onChange={(event) => setStatus(event.target.value)}
           value={status}
         />
+        {newImage? <img src={newImage} alt="" className="post-image"/> : <></>}
+        <label for="pic-upload"><AiOutlinePicture size={30} className="picture-icon"/></label>
+        <input type="file" id="pic-upload" hidden onChange={(event) => {
+          setCurrentImage(event.target.files[0])
+          setNewImage(URL.createObjectURL(event.target.files[0]));
+          }}/>
+        
       </Modal>
     </>
   );

@@ -16,6 +16,7 @@ function PostStatus({currentUser}) {
   const [currentPost,setCurrentPost] = useState({})
   const [isEdit, setIsEdit] = useState(false)
   const [allStatuses, setAllStatuses] = useState([])
+  const [currentImage, setCurrentImage] = useState({})
   const sendStatus = async () => {
     const postID = uniqueID()
     let object = {
@@ -70,6 +71,8 @@ function PostStatus({currentUser}) {
         setIsEdit={setIsEdit}
         isEdit={isEdit}
         updateStatus={updateStatus}
+        currentImage={currentImage}
+        setCurrentImage={setCurrentImage}
       />
         {allStatuses.map((posts) =>{
           return <PostsCard posts={posts} getEditData={getEditData}/>

@@ -5,8 +5,9 @@ import {
   getPostUser,
   getCurrentUser,
   deletePost,
+  getConnections
 } from "../../../api/FirestoreAPI";
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import { BiPencil } from "react-icons/bi";
 import { BsTrash3Fill } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
@@ -14,6 +15,7 @@ import { useNavigate } from "react-router-dom";
 function PostsCard({ posts, getEditData }) {
   const navigate = useNavigate();
   const [postUser, setPostUser] = useState({});
+  const [isConnected, setIsConnected] = useState(false)
   const [currentUser, setCurrentUser] = useState({});
   useMemo(() => {
     getPostUser(setPostUser, posts.userEmail);
@@ -21,7 +23,11 @@ function PostsCard({ posts, getEditData }) {
   useMemo(() => {
     getCurrentUser(setCurrentUser);
   }, []);
-  return (
+  useEffect(() => {
+    getConnections(currentUser.userID, postUser.userID, setIsConnected)
+  }, [currentUser.userID, postUser])
+  
+  return (isConnected || postUser.email===currentUser.email)? (
     <div className="posts-card">
       {currentUser.email === postUser.email ? (
         <div className="card-icons-div">
@@ -61,7 +67,7 @@ function PostsCard({ posts, getEditData }) {
         currentUser={currentUser}
       />
     </div>
-  );
+  ): <></>;
 }
 
 export default PostsCard;

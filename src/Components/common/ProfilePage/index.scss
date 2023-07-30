@@ -28,6 +28,29 @@ $linkedinBlue2: #004f79;
     font-weight: 600;
 }
 
+.info-right{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.info-right button{
+    width: 130px;
+    height: 30px;    
+    margin-top: auto;
+    margin-left: auto;
+    cursor: pointer;
+    background-color: $linkedinBlue;
+    margin-top: 15px;
+    border-radius: 25px;
+    outline: none;
+    border: none;
+    font-family: system-ui;
+    font-weight: 600;
+    color: #fff;
+    font-size: 15px;
+}
+
 .profile-image{
     width: 150px;
     height: 150px;

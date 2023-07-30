@@ -11,6 +11,7 @@ $linkedinBlue2: #004f79;
     height: 100px;
     text-align: left;
     font-size: 16px;
+    resize: none;
 }
 
 .modal-div{
@@ -78,4 +79,17 @@ $linkedinBlue2: #004f79;
 
 .logout-btn:hover{
     text-decoration: underline;
+}
+
+.picture-icon{
+    color: $linkedinBlue;   
+    cursor: pointer;
+    position: absolute;
+    bottom: 20px;
+    left: 30px;
+}
+
+.post-image{
+    height: 100%;
+    width: 100%;
 }
