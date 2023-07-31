@@ -24,3 +24,17 @@ export const uploadImage = (file, userID, setProgress, setModalOpen, setCurrentI
         })
     })
 }
+
+export const uploadPostImage = (file) => {
+    const postPicsRef = ref(storage, `postImages/${file.name}`)
+    const uploadTask = uploadBytesResumable(postPicsRef, file)
+    uploadTask.on('state_changed', (snapshot) => {
+        const progress = Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100)
+    }, (error) =>{
+        console.error(err)
+    }, () => {
+        getDownloadURL(uploadTask.snapshot.ref)
+        .then((response) => {
+        })
+    })
+}

@@ -70,7 +70,7 @@ function ProfileCard({ currentUser, onEdit }) {
               <p className="company">{presentUser.company}</p>
               <p className="college">{presentUser.college}</p>
             </div>
-            {isConnected ? <></> : <button onClick={() => makeConnection(presentUser.userID)}> <HiUsers></HiUsers> Connect</button>}
+            {(isConnected || currentUser.email===presentUser.email) ? <></> : <button onClick={() => makeConnection(presentUser.userID)}> <HiUsers></HiUsers> Connect</button>}
           </div>
         </div>
       </div>
