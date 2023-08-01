@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Modal, Button } from "antd";
+import { Modal, Button, Progress } from "antd";
 import "./index.scss";
 import { AiOutlinePicture } from 'react-icons/ai'
 
@@ -12,10 +12,11 @@ const ModalComponent = ({
   setIsEdit,
   isEdit,
   updateStatus,
-  currentImage,
-  setCurrentImage
+  uploadPostImage,
+  setPostImage,
+  postImage
 }) => {
-  const [newImage, setNewImage] = useState();
+  const [progress, setProgress] = useState(0);
   return (
     <>
       <Modal
@@ -26,13 +27,13 @@ const ModalComponent = ({
           setModalOpen(false);
           setStatus("");
           setIsEdit(false);
-          setNewImage()
+          setPostImage('')
         }}
         onCancel={() => {
           setModalOpen(false);
           setStatus("");
           setIsEdit(false);
-          setNewImage()
+          setPostImage('')
         }}
         footer={[
           <Button
@@ -54,11 +55,11 @@ const ModalComponent = ({
           onChange={(event) => setStatus(event.target.value)}
           value={status}
         />
-        {newImage? <img src={newImage} alt="" className="post-image"/> : <></>}
+        {postImage? <img src={postImage} alt="" className="post-image"/> : <></>}
+        {progress === 0 ? <></>:<Progress percent={progress} size="small" />}
         <label for="pic-upload"><AiOutlinePicture size={30} className="picture-icon"/></label>
         <input type="file" id="pic-upload" hidden onChange={(event) => {
-          setCurrentImage(event.target.files[0])
-          setNewImage(URL.createObjectURL(event.target.files[0]));
+          uploadPostImage(event.target.files[0], setPostImage, setProgress)
           }}/>
         
       </Modal>

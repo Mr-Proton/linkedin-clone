@@ -6,7 +6,6 @@
     border: 1px solid #d8d8d8;
     border-radius: 7px;
     background-color: #FFFEFE;   
-    padding-left: 2%;
     position: relative;
 }
 
@@ -17,6 +16,7 @@
     font-weight: 400;
     color: rgba(0,0,0,0.9);
     margin-top: 12px;
+    padding-left: 2%;
 }
 
 .profile-head-info{
@@ -25,6 +25,7 @@
     margin-left: -10px;
     margin-top: 10px;
     cursor: pointer;
+    margin-left: 2%;
 }
 
 .mini-profile{
@@ -77,4 +78,14 @@
     color: rgba(0,0,0,0.6);
     font-weight: 400;
     margin-top: 10px;
+    padding-left: 2%;
+}
+
+.post-image{
+    width: 97%;
+    height: 100%;
+    margin-top: 2%;
+    max-height: 400px;
+    object-fit: contain;
+
 }

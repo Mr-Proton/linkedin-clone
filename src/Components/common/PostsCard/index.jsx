@@ -61,6 +61,7 @@ function PostsCard({ posts, getEditData }) {
       </div>
       <p className="timestamp">{posts.timeStamp}</p>
       <p className="status">{posts.status}</p>
+      {posts.postImage? <img src={posts.postImage} className="post-image"></img> : <></>}
       <LikeButton
         userID={currentUser.userID}
         postID={posts.postID}

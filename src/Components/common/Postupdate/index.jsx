@@ -2,7 +2,7 @@ import React, { useState, useMemo, useId } from "react";
 import "./index.scss";
 import blank_profile from "../../Images/blank_profile.jpg";
 import uniqueID from "../../../helpers/uniqueID";
-import { uid } from "react-uid";
+import { uploadPostImage } from "../../../api/imageUpload";
 import { postStatus, getStatus, updatePost } from "../../../api/FirestoreAPI";
 import PostsCard from "../PostsCard/index";
 import { getCurrentTimeStamp } from "../../../helpers/useMoment";
@@ -16,7 +16,7 @@ function PostStatus({currentUser}) {
   const [currentPost,setCurrentPost] = useState({})
   const [isEdit, setIsEdit] = useState(false)
   const [allStatuses, setAllStatuses] = useState([])
-  const [currentImage, setCurrentImage] = useState({})
+  const [postImage, setPostImage] = useState('')
   const sendStatus = async () => {
     const postID = uniqueID()
     let object = {
@@ -24,7 +24,8 @@ function PostStatus({currentUser}) {
       timeStamp: getCurrentTimeStamp("LLL"),
       userEmail: currentUser.email,
       userName: currentUser.name,
-      postID: postID
+      postID: postID,
+      postImage: postImage
     }
     await postStatus(object) 
     await setModalOpen(false)
@@ -37,9 +38,10 @@ function PostStatus({currentUser}) {
     setModalOpen(true)
     setCurrentPost(posts)
     setIsEdit(true)
+    setPostImage(posts.postImage)
   }
   const updateStatus = () => {
-    updatePost(currentPost.id, status)
+    updatePost(currentPost.id, status, postImage)
     setStatus("")
     setIsEdit(false)
     setModalOpen(false)
@@ -71,8 +73,9 @@ function PostStatus({currentUser}) {
         setIsEdit={setIsEdit}
         isEdit={isEdit}
         updateStatus={updateStatus}
-        currentImage={currentImage}
-        setCurrentImage={setCurrentImage}
+        uploadPostImage={uploadPostImage}
+        setPostImage={setPostImage}
+        postImage={postImage}
       />
         {allStatuses.map((posts) =>{
           return <PostsCard posts={posts} getEditData={getEditData}/>
